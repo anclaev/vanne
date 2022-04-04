@@ -1,2 +1,2 @@
 #!/bin/bash
-./build-core.sh
+./build-api.sh
