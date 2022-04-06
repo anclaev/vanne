@@ -1,12 +1,12 @@
 version: '2'
 services:
-  # client:
-  #   container_name: vanne-client
-  #   image: vanne-client:latest
-  #   restart: always
-  #   networks:
-  #     network:
-  #       ipv4_address: 172.20.128.2
+  client:
+    container_name: vanne-client
+    image: vanne-client:latest
+    restart: always
+    networks:
+      network:
+        ipv4_address: 172.20.128.2
 
   core:
     container_name: vanne-api
