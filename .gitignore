@@ -1,4 +1,5 @@
 client
 server
 data/db
+data/redis
 .env
