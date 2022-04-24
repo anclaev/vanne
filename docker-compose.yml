@@ -14,6 +14,7 @@ services:
     restart: always
     depends_on:
       - db
+      - redis
     environment:
       - APP_PORT=17001
       - DB_HOST=vanne-db
@@ -23,6 +24,7 @@ services:
       network:
         ipv4_address: 172.20.128.3
       db_network:
+      cache_network:
 
   db:
     container_name: vanne-db
@@ -36,12 +38,21 @@ services:
     networks:
       - db_network
 
+  redis:
+    container_name: vanne-redis
+    image: redis:alpine
+    restart: always
+    networks:
+      - cache_network
+
 networks:
   network:
     ipam:
       config:
         - subnet: 172.20.0.0/16
   db_network:
+    driver: bridge
+  cache_network:
     driver: bridge
 
 volumes:
