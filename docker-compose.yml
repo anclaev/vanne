@@ -37,17 +37,15 @@ services:
     networks:
       - db_network
 
-  # redis:
-  #   container_name: vanne-redis
-  #   image: redis:latest
-  #   command: ["redis-server", "--bind", "redis", "--port", "6379"]
-  #   volumes:
-  #     - /home/anclaev/projects/vanne/data/redis:/data
-  #   restart: always
-  #   ports:
-  #     - 6379:6379
-  #   networks:
-  #     - db_network
+  redis:
+    container_name: vanne-redis
+    image: redis:latest
+    command: ['redis-server', '--bind', 'redis', '--port', '6379']
+    volumes:
+      - /home/anclaev/projects/vanne/data/redis:/data
+    restart: always
+    networks:
+      - db_network
 
 networks:
   network:
