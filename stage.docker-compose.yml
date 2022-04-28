@@ -8,7 +8,7 @@ services:
       - core
     networks:
       network:
-        ipv4_address: 172.20.130.2
+        ipv4_address: 172.21.128.2
 
   core:
     container_name: vanne-api-stage
@@ -24,7 +24,7 @@ services:
       - DB_PWD=${MONGO_ROOT_PASSWORD}
     networks:
       network:
-        ipv4_address: 172.20.130.3
+        ipv4_address: 172.21.128.3
       db_network:
 
   db:
@@ -38,7 +38,7 @@ services:
     restart: always
     networks:
       network:
-        ipv4_address: 172.20.130.4
+        ipv4_address: 172.21.128.4
       db_network:
 
   redis:
@@ -55,7 +55,7 @@ networks:
   network:
     ipam:
       config:
-        - subnet: 172.20.0.0/16
+        - subnet: 172.21.0.0/16
   db_network:
     driver: bridge
 

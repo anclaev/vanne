@@ -1,5 +1,5 @@
 client
 server
-data/db
-data/redis
+data/*/db
+data/*/redis
 .env

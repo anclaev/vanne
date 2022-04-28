@@ -34,7 +34,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
     volumes:
-      - /home/anclaev/projects/vanne/data/db:/data/db
+      - /home/anclaev/projects/vanne/data/prod/db:/data/db
     restart: always
     networks:
       network:
@@ -46,7 +46,7 @@ services:
     image: redis:latest
     command: ['redis-server', '--bind', 'redis', '--port', '6379']
     volumes:
-      - /home/anclaev/projects/vanne/data/redis:/data
+      - /home/anclaev/projects/vanne/data/prod/redis:/data
     restart: always
     networks:
       - db_network
