@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build --pull --rm -f "./server/Dockerfile" -t vanne-api:latest "./server"
+docker build --pull --rm -f "./server/prod.Dockerfile" -t vanne-api:latest "./server"
