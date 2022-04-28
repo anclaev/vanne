@@ -35,7 +35,9 @@ services:
       - /home/anclaev/projects/vanne/data/db:/data/db
     restart: always
     networks:
-      - db_network
+      network:
+        ipv4_address: 172.20.128.4
+      db_network:
 
   redis:
     container_name: vanne-redis
