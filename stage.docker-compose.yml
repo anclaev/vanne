@@ -1,52 +1,52 @@
 version: '2'
 services:
   client:
-    container_name: vanne-client
-    image: vanne-client:latest
+    container_name: vanne-client-stage
+    image: vanne-client:stage
     restart: always
     depends_on:
       - core
     networks:
       network:
-        ipv4_address: 172.20.128.2
+        ipv4_address: 172.20.130.2
 
   core:
-    container_name: vanne-api
-    image: vanne-api:latest
+    container_name: vanne-api-stage
+    image: vanne-api:stage
     restart: always
     depends_on:
       - db
       - redis
     environment:
       - APP_PORT=17001
-      - DB_HOST=vanne-db
+      - DB_HOST=vanne-db-stage
       - DB_USER=${MONGO_ROOT_USER}
       - DB_PWD=${MONGO_ROOT_PASSWORD}
     networks:
       network:
-        ipv4_address: 172.20.128.3
+        ipv4_address: 172.20.130.3
       db_network:
 
   db:
-    container_name: vanne-db
+    container_name: vanne-db-stage
     image: mongo
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
     volumes:
-      - /home/anclaev/projects/vanne/data/db:/data/db
+      - /home/anclaev/projects/vanne/data/stage/db:/data/db
     restart: always
     networks:
       network:
-        ipv4_address: 172.20.128.4
+        ipv4_address: 172.20.130.4
       db_network:
 
   redis:
-    container_name: vanne-redis
+    container_name: vanne-redis-stage
     image: redis:latest
     command: ['redis-server', '--bind', 'redis', '--port', '6379']
     volumes:
-      - /home/anclaev/projects/vanne/data/redis:/data
+      - /home/anclaev/projects/vanne/data/stage/redis:/data
     restart: always
     networks:
       - db_network

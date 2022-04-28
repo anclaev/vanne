@@ -1,2 +1,7 @@
 #!/bin/bash
-docker build --pull --rm -f "./client/prod.Dockerfile" -t vanne-client:latest "./client"
+if [ -n "$1" ]
+then 
+docker build --pull --rm -f "./client/$1.Dockerfile" -t vanne-client:$1 "./client"
+else
+echo "Необходимо указать окружение (prod/stage)"
+fi

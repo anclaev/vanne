@@ -1,3 +1,8 @@
 #!/bin/bash
-docker-compose -f 'docker-compose.yml'  -p 'vanne' down
-docker-compose up -d
+if [ -n "$1" ]
+then 
+docker-compose -f "$1.docker-compose.yml"  -p "vanne-$1" down
+docker-compose -f "$1.docker-compose.yml" -p "vanne-$1" up -d
+else
+echo "Необходимо указать окружение (prod/stage)"
+fi
