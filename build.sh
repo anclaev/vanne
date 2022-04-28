@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -n "$1" ]
+if [[ $1 = 'prod' || $1 = 'stage' ]]
 then 
 ./build-api.sh $1 && ./build-client.sh $1
 else
