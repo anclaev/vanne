@@ -17,6 +17,15 @@
 - Внутренний IP (api) - 172.20.128.3
 - Внутренний IP (db) - 172.20.128.4
 
+## Документация
+- API - [api.vanne.uno](https://api.vanne.uno)
+- Клиент - [docs.vanne.uno](https://docs.vanne.uno)
+- GraphQL - [api.vanne.uno/gql](https://api.vanne.uno/gql)
+
+## Stage-версии
+- API - [vanne-ns.anclaev.com](https://vanne-ns.anclaev.com)
+- Клиент - [vanne-ng.anclaev.com](https://vanne-ng.anclaev.com)
+
 ## Статус
 
 ### Клиент
