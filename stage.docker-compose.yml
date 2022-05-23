@@ -6,9 +6,12 @@ services:
     restart: always
     depends_on:
       - core
+    environment:
+      - VIRTUAL_HOST=vanne-ng.anclaev.com
+      - LETSENCRYPT_HOST=vanne-ng.anclaev.com
+      - VIRTUAL_PORT=80
     networks:
-      network:
-        ipv4_address: 172.21.128.2
+      - net
 
   core:
     container_name: vanne-api-stage
@@ -22,10 +25,12 @@ services:
       - DB_HOST=vanne-db-stage
       - DB_USER=${MONGO_ROOT_USER}
       - DB_PWD=${MONGO_ROOT_PASSWORD}
+      - VIRTUAL_HOST=vanne-ns.anclaev.com
+      - VIRTUAL_PORT=17001
+      - LETSENCRYPT_HOST=vanne-ns.anclaev.com
     networks:
-      network:
-        ipv4_address: 172.21.128.3
-      db_network:
+      - net
+      - db_network
 
   db:
     container_name: vanne-db-stage
@@ -37,14 +42,12 @@ services:
       - /home/anclaev/projects/vanne/data/stage/db:/data/db
     restart: always
     networks:
-      network:
-        ipv4_address: 172.21.128.4
-      db_network:
+      - db_network
 
   redis:
     container_name: vanne-redis-stage
     image: redis:latest
-    command: ['redis-server', '--bind', 'redis', '--port', '6379']
+    command: [ 'redis-server', '--bind', 'redis', '--port', '6379' ]
     volumes:
       - /home/anclaev/projects/vanne/data/stage/redis:/data
     restart: always
@@ -52,10 +55,9 @@ services:
       - db_network
 
 networks:
-  network:
-    ipam:
-      config:
-        - subnet: 172.21.0.0/16
+  net:
+    external: true
+
   db_network:
     driver: bridge
 

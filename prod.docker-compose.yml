@@ -6,9 +6,12 @@ services:
     restart: always
     depends_on:
       - core
+    environment:
+      - VIRTUAL_HOST=vanne.uno
+      - LETSENCRYPT_HOST=vanne.uno
+      - VIRTUAL_PORT=80
     networks:
-      network:
-        ipv4_address: 172.20.128.2
+      - net
 
   core:
     container_name: vanne-api
@@ -22,10 +25,12 @@ services:
       - DB_HOST=vanne-db
       - DB_USER=${MONGO_ROOT_USER}
       - DB_PWD=${MONGO_ROOT_PASSWORD}
+      - VIRTUAL_HOST=core.vanne.uno
+      - VIRTUAL_PORT=17001
+      - LETSENCRYPT_HOST=core.vanne.uno
     networks:
-      network:
-        ipv4_address: 172.20.128.3
-      db_network:
+      - net
+      - db_network
 
   db:
     container_name: vanne-db
@@ -37,14 +42,13 @@ services:
       - /home/anclaev/projects/vanne/data/prod/db:/data/db
     restart: always
     networks:
-      network:
-        ipv4_address: 172.20.128.4
-      db_network:
+      - net
+      - db_network
 
   redis:
     container_name: vanne-redis
     image: redis:latest
-    command: ['redis-server', '--bind', 'redis', '--port', '6379']
+    command: [ 'redis-server', '--bind', 'redis', '--port', '6379' ]
     volumes:
       - /home/anclaev/projects/vanne/data/prod/redis:/data
     restart: always
@@ -52,10 +56,9 @@ services:
       - db_network
 
 networks:
-  network:
-    ipam:
-      config:
-        - subnet: 172.20.0.0/16
+  net:
+    external: true
+
   db_network:
     driver: bridge
 
